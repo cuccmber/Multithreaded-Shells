@@ -48,14 +48,6 @@ public class ShellThread extends Thread {
            }
         });
     }
-    public static int CountIncrement(){
-        int count = 0;
-        count++;
-        if(count > 5){
-            count = 0;
-        }
-        return count;
-    }
 
     public static void MoveShell(Shell shell1, Shell shell2, Shell shell3, Shell shell4, Shell shell5, int count) {
         shell1.setBounds(Window.x_coords[count], Window.y_coords[count], 250, 250);
@@ -72,13 +64,15 @@ public class ShellThread extends Thread {
 
         shell5.setBounds(Window.x_coords[count+4], Window.y_coords[count+4], 250, 250);
         shell5.open();
-
+/*
         try {
             Thread.sleep(1000);
         }
         catch (InterruptedException e) {
             System.out.println("Interrupt");
         }
+        */
+
     }
 
     public static void HideShell(Shell shell1, Shell shell2, Shell shell3, Shell shell4, Shell shell5){
