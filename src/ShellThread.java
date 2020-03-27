@@ -8,28 +8,6 @@ public class ShellThread extends Thread {
     @Override
     public void run() {
 
-        Display display = Display.getDefault();
-
-        //Shell first_shell = new Shell(display);
-
-
-        Shell second_shell = new Shell(display);
-        SecondGroup.MyGroup(display, second_shell);
-        second_shell.setLayout(new FillLayout());
-
-        Shell third_shell = new Shell(display);
-        ThirdGroup.MyGroup(display, third_shell);
-        third_shell.setLayout(new FillLayout());
-
-        Shell fourth_shell = new Shell(display);
-        FourthGroup.MyGroup(display, fourth_shell);
-        fourth_shell.setLayout(new FillLayout());
-
-        Shell fifth_shell = new Shell(display);
-        FifthGroup.MyGroup(display, fifth_shell);
-        fifth_shell.setLayout(new FillLayout());
-
-
         Display.getDefault().asyncExec(new Runnable() {
 
             @Override
@@ -38,11 +16,12 @@ public class ShellThread extends Thread {
                     count = 0;
                 }
                 if(Window.GetChoice() == true){
-                    MoveShell(Window.GetFirstShell(), Window.GetSecondShell(), Window.GetThirdShell(), Window.GetFourthShell(), Window.GetFifthShell(), count);
-
+                    MoveShell(Window.GetFirstShell(), Window.GetSecondShell(), Window.GetThirdShell(),
+                            Window.GetFourthShell(), Window.GetFifthShell(), count);
                     count++;
                 }else{
-                    HideShell(Window.GetFirstShell(), Window.GetSecondShell(), Window.GetThirdShell(), Window.GetFourthShell(), Window.GetFifthShell());
+                    HideShell(Window.GetFirstShell(), Window.GetSecondShell(), Window.GetThirdShell(),
+                            Window.GetFourthShell(), Window.GetFifthShell());
 
                 }
            }

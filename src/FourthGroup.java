@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-public class FourthGroup extends Window{
+public class FourthGroup{
     public static void main(String[] args, Display display, Shell shell) {
         MyGroup(display, shell);
     }

@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-public class FirstGroup extends Window{
+public class FirstGroup{
 
 
     public static void main(String[] args, Display display, Shell shell) {
