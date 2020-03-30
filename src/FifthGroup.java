@@ -69,7 +69,7 @@ public class FifthGroup{
                 else {
                     int index = table.getSelectionIndex();
                     TableItem item = table.getItem(index);
-                    if(item.getText(0) != "" && item.getText(1) == "") {
+                    if(!item.getText(0).equals("") && item.getText(1).equals("")) {
                         item.setText(1, item.getText(0));
                         item.setText(0, "");
                     }
@@ -93,7 +93,7 @@ public class FifthGroup{
                 else {
                     int index = table.getSelectionIndex();
                     TableItem item = table.getItem(index);
-                    if(item.getText(0) == "" && item.getText(1) != "") {
+                    if(item.getText(0).equals("") && item.getText(1) != "") {
                         item.setText(0, item.getText(1));
                         item.setText(1, "");
                     }
