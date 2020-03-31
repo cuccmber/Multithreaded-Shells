@@ -2,9 +2,11 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 public class ShellThread extends Thread {
-    private int count = 0;
-    Display display;
+    int count = 0;
     Window window;
+
+
+
 
     ShellThread(Window tWindow){
         window = tWindow;

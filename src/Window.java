@@ -5,6 +5,9 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 
+import static java.lang.Math.sin;
+import static java.lang.Math.cos;
+
 public class Window{
 
     public static int[] x_coords = new int[]{700, 940, 850, 550, 460, 700, 940, 850, 550, 460};
@@ -23,6 +26,17 @@ public class Window{
         thirdShell = new Shell();
         fourthShell = new Shell();
         fifthShell = new Shell();
+    }
+
+    public Point GetLocation(float displayHeight, float displayWidth, int radius, float angle){
+        Point center = new Point(displayHeight/2, displayWidth/2);
+        double height = 0;
+        double width = 0;
+        height = cos(angle)*radius;
+        width = sin(angle)*radius;
+
+        Point point = new Point(height, width);
+        return point;
     }
 
     private void setFirstShell(){
@@ -94,6 +108,10 @@ public class Window{
         shell.pack();
         shell.open();
 
+        System.out.println(window.GetLocation(1080, 1920, 250, 10).X);
+        System.out.println(" ");
+        System.out.println(window.GetLocation(1080, 1920, 250, 10).Y);
+
         final boolean move[] = {false};
 
         display.addFilter(SWT.KeyDown, new Listener() {
@@ -123,7 +141,6 @@ public class Window{
             }
         }
     }
-
     public static void setChoice(boolean move){
         choice = move;
     }
