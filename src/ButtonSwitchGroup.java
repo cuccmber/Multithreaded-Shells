@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-public class SecondGroup{
+public class ButtonSwitchGroup {
 
     public static void main(String[] args, Display display, Shell shell) {
         MyGroup(display, shell);

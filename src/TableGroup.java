@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
-public class FifthGroup{
+public class TableGroup {
     public static void main(String[] args, Display display, Shell shell) {
         MyGroup(display, shell);
     }

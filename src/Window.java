@@ -5,84 +5,54 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 
+import java.util.ArrayList;
+
 import static java.lang.Math.sin;
 import static java.lang.Math.cos;
 
 public class Window{
 
-    public static int[] x_coords = new int[]{700, 940, 850, 550, 460, 700, 940, 850, 550, 460};
-    public static int[] y_coords = new int[]{160, 400, 650, 650, 400, 160, 400, 650, 650, 400};
-    private static boolean choice;
+    int count;
+    static boolean choice;
 
-    private final Shell firstShell;
-    private final Shell secondShell;
-    private final Shell thirdShell;
-    private final Shell fourthShell;
-    private final Shell fifthShell;
+    ArrayList<Shell> movingShells;
 
     public Window() {
-        firstShell = new Shell();
-        secondShell = new Shell();
-        thirdShell = new Shell();
-        fourthShell = new Shell();
-        fifthShell = new Shell();
+        movingShells = new ArrayList<Shell>();
     }
 
+    public void incrementCount(){
+        if(count > 4){
+            count = 0;
+        }
+        count++;
+    }
 
-    public Point GetLocation(float displayHeight, float displayWidth, int radius, float angle){
-        Point center = new Point(displayHeight/2, displayWidth/2);
-        double height = 0;
-        double width = 0;
-        height = cos(angle)*radius;
-        width = sin(angle)*radius;
+    public int getCount(){
+        return count;
+    }
+
+    public void addShellToList(Shell adding){
+        adding.setLayout(new FillLayout());
+        movingShells.add(adding);
+    }
+
+    public ArrayList<Shell> getShell(){
+        return movingShells;
+    }
+
+    public Point GetLocation(int radius, int numberOfShells, int currentShell){
+        Point center = new Point(500, 500);
+        float angle = 360 / numberOfShells;
+        currentShell++;
+
+        System.out.println(angle);
+
+        int height = (int) (radius * sin(angle*currentShell)) + center.X;
+        int width = (int) (radius * (1 - cos(angle*currentShell))) + center.Y;
 
         Point point = new Point(height, width);
         return point;
-    }
-
-    private void setFirstShell(){
-        firstShell.setLayout(new FillLayout());
-        FirstGroup.MyGroup(Display.getDefault(), firstShell);
-    }
-
-    private void setSecondShell(){
-        secondShell.setLayout(new FillLayout());
-        SecondGroup.MyGroup(Display.getDefault(), secondShell);
-    }
-
-    private void setThirdShell(){
-        thirdShell.setLayout(new FillLayout());
-        ThirdGroup.MyGroup(Display.getDefault(), thirdShell);
-    }
-
-    private void setFourthShell(){
-        fourthShell.setLayout(new FillLayout());
-        FourthGroup.MyGroup(Display.getDefault(), fourthShell);
-    }
-
-    private void setFifthShell(){
-        fifthShell.setLayout(new FillLayout());
-        FifthGroup.MyGroup(Display.getDefault(), fifthShell);
-    }
-
-    public Shell getFirstShell(){
-        return firstShell;
-    }
-
-    public Shell getSecondShell(){
-        return secondShell;
-    }
-
-    public Shell getThirdShell(){
-        return thirdShell;
-    }
-
-    public Shell getFourthShell(){
-        return fourthShell;
-    }
-
-    public Shell getFifthShell(){
-        return fifthShell;
     }
 
     public static void main(String[] args) {
@@ -91,17 +61,22 @@ public class Window{
         Shell shell = new Shell(display);
         shell.setLayout(new FillLayout());
 
-        FirstGroup.MyGroup(display, shell);
-        SecondGroup.MyGroup(display, shell);
-        ThirdGroup.MyGroup(display, shell);
-        FourthGroup.MyGroup(display, shell);
-        FifthGroup.MyGroup(display, shell);
+        ComboGroub.MyGroup(display, shell);
+        ButtonSwitchGroup.MyGroup(display, shell);
+        RadioButtonGroup.MyGroup(display, shell);
+        CheckButtonGroup.MyGroup(display, shell);
+        TableGroup.MyGroup(display, shell);
 
-        window.setFirstShell();
-        window.setSecondShell();
-        window.setThirdShell();
-        window.setFourthShell();
-        window.setFifthShell();
+        int numberOfShells = 5;
+        for(int i = 0; i < numberOfShells; i++) {
+            window.addShellToList(new Shell());
+        }
+
+        ComboGroub.MyGroup(display, window.getShell().get(0));
+        ButtonSwitchGroup.MyGroup(display, window.getShell().get(1));
+        RadioButtonGroup.MyGroup(display, window.getShell().get(2));
+        CheckButtonGroup.MyGroup(display, window.getShell().get(3));
+        TableGroup.MyGroup(display, window.getShell().get(4));
 
         shell.setText("Option 19");
         shell.setSize(900, 600);
@@ -109,11 +84,7 @@ public class Window{
         shell.pack();
         shell.open();
 
-        System.out.println(window.GetLocation(1080, 1920, 250, 10).X);
-        System.out.println(" ");
-        System.out.println(window.GetLocation(1080, 1920, 250, 10).Y);
-
-        final boolean move[] = {false};
+        final boolean move = false;
 
         display.addFilter(SWT.KeyDown, new Listener() {
             public void handleEvent(Event e) {
