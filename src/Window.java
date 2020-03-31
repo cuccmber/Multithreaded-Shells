@@ -27,6 +27,7 @@ public class Window{
         fourthShell = new Shell();
         fifthShell = new Shell();
     }
+    //
 
     public Point GetLocation(float displayHeight, float displayWidth, int radius, float angle){
         Point center = new Point(displayHeight/2, displayWidth/2);
