@@ -13,16 +13,20 @@ import static java.lang.Math.cos;
 public class Window{
 
     int count;
-    static boolean choice;
-
+    int numberOfShells = 5;
+    boolean choice;
     ArrayList<Shell> movingShells;
 
     public Window() {
         movingShells = new ArrayList<Shell>();
     }
 
+    public int getNumberOfShells(){
+        return numberOfShells;
+    }
+
     public void incrementCount(){
-        if(count > 4){
+        if(count > numberOfShells - 1){
             count = 0;
         }
         count++;
@@ -41,59 +45,61 @@ public class Window{
         return movingShells;
     }
 
-    public Point GetLocation(int radius, int numberOfShells, int currentShell){
-        Point center = new Point(500, 500);
-        float angle = 360 / numberOfShells;
-        currentShell++;
+    public Point getLocation(int borderX, int borderY, int radius, int numberOfShells, int currentShell){
 
-        System.out.println(angle);
+        Point center = new Point(borderX/2, borderY/2);
+        float angle = 90 - (360 / numberOfShells*currentShell);
 
-        int height = (int) (radius * sin(angle*currentShell)) + center.X;
-        int width = (int) (radius * (1 - cos(angle*currentShell))) + center.Y;
+        int x = (int) (radius * cos(Math.toRadians(angle))) + center.X;
+        int y = (int) (radius * sin(Math.toRadians(angle))) + center.Y;
 
-        Point point = new Point(height, width);
+        Point point = new Point(x, y);
         return point;
     }
 
+    public void setChoice(boolean move){
+        choice = move;
+    }
+
+    public boolean getChoice(){
+        return choice;
+    }
+
     public static void main(String[] args) {
-        Display display = new Display();
         Window window = new Window();
-        Shell shell = new Shell(display);
-        shell.setLayout(new FillLayout());
+        Display display = new Display();
+        Shell mainShell = new Shell(display);
+        mainShell.setLayout(new FillLayout());
 
-        ComboGroub.MyGroup(display, shell);
-        ButtonSwitchGroup.MyGroup(display, shell);
-        RadioButtonGroup.MyGroup(display, shell);
-        CheckButtonGroup.MyGroup(display, shell);
-        TableGroup.MyGroup(display, shell);
+        ComboGroup.myGroup(display, mainShell);
+        ButtonSwitchGroup.myGroup(display, mainShell);
+        RadioButtonGroup.myGroup(display, mainShell);
+        CheckButtonGroup.myGroup(display, mainShell);
+        TableGroup.myGroup(display, mainShell);
 
-        int numberOfShells = 5;
-        for(int i = 0; i < numberOfShells; i++) {
+        for(int i = 0; i < window.getNumberOfShells(); i++) {
             window.addShellToList(new Shell());
         }
 
-        ComboGroub.MyGroup(display, window.getShell().get(0));
-        ButtonSwitchGroup.MyGroup(display, window.getShell().get(1));
-        RadioButtonGroup.MyGroup(display, window.getShell().get(2));
-        CheckButtonGroup.MyGroup(display, window.getShell().get(3));
-        TableGroup.MyGroup(display, window.getShell().get(4));
+        ComboGroup.myGroup(display, window.getShell().get(0));
+        ButtonSwitchGroup.myGroup(display, window.getShell().get(1));
+        RadioButtonGroup.myGroup(display, window.getShell().get(2));
+        CheckButtonGroup.myGroup(display, window.getShell().get(3));
+        TableGroup.myGroup(display, window.getShell().get(4));
 
-        shell.setText("Option 19");
-        shell.setSize(900, 600);
-        shell.setBounds(500, 300, 0, 0);
-        shell.pack();
-        shell.open();
-
-        final boolean move = false;
+        mainShell.setText("Option 19");
+        mainShell.setLocation(500, 300);
+        mainShell.pack();
+        mainShell.open();
 
         display.addFilter(SWT.KeyDown, new Listener() {
             public void handleEvent(Event e) {
                 if (e.character == 0x01) {
-                    setChoice(true);
-                    shell.setVisible(false);
+                    window.setChoice(true);
+                    mainShell.setVisible(false);
                     new ShellThread(window).start();
                 }else if (e.character == 0x02){
-                    setChoice(false);
+                    window.setChoice(false);
 
                     try {
                         Thread.sleep(1000);
@@ -101,24 +107,16 @@ public class Window{
                         System.out.println("Interrupt");
                     }
 
-                    shell.open();
+                    mainShell.open();
                     }
             }
 
         });
 
-        while(!shell.isDisposed()) {
+        while(!mainShell.isDisposed()) {
             if(display.readAndDispatch()) {
                 display.sleep();
             }
         }
     }
-    public static void setChoice(boolean move){
-        choice = move;
-    }
-
-    public static boolean getChoice(){
-        return choice;
-    }
-
 }

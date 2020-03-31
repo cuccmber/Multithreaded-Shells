@@ -7,22 +7,26 @@ public class ShellThread extends Thread {
     Window window;
 
 
-
-
     ShellThread(Window thisWindow){
         window = thisWindow;
+    }
+
+    public static void hideShell(ArrayList<Shell> hidingShells) {
+        for(int i = 0; i < hidingShells.size(); i++){
+            hidingShells.get(i).setVisible(false);
+        }
     }
 
     @Override
     public void run() {
 
-        while (Window.getChoice()) {
+        while (window.getChoice()) {
             Display.getDefault().asyncExec(() -> {
 
                 for(int i = 0; i < window.getShell().size(); i++){
-                    int X = window.GetLocation(200, 5, i).X;
-                    int Y = window.GetLocation(200, 5, i).Y;
-                    window.getShell().get(i).setBounds(X, Y, 250, 250);
+                    Point myPoint = window.getLocation(1500, 800, 250, window.getNumberOfShells(), i - window.getCount());
+
+                    window.getShell().get(i).setBounds(myPoint.X, myPoint.Y, 250, 250);
                     window.getShell().get(i).open();
                 }
                 window.incrementCount();
@@ -37,14 +41,8 @@ public class ShellThread extends Thread {
         }
 
         Display.getDefault().asyncExec(() -> {
-            HideShell(window.getShell());
+            hideShell(window.getShell());
         });
 
-    }
-
-    public static void HideShell(ArrayList<Shell> hidingShells) {
-        for(int i = 0; i < hidingShells.size(); i++){
-            hidingShells.get(i).setVisible(false);
-        }
     }
 }

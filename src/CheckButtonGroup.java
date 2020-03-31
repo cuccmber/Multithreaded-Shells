@@ -11,64 +11,64 @@ import org.eclipse.swt.widgets.Text;
 
 public class CheckButtonGroup {
     public static void main(String[] args, Display display, Shell shell) {
-        MyGroup(display, shell);
+        myGroup(display, shell);
     }
 
-    static void MyGroup(Display display, Shell shell) {
-        Group group4 = new Group(shell, SWT.NONE);
-        group4.setText("Group №4");;
-        group4.setLayout(new FillLayout(SWT.VERTICAL));
+    static void myGroup(Display display, Shell shell) {
+        Group group = new Group(shell, SWT.NONE);
+        group.setText("Group №4");;
+        group.setLayout(new FillLayout(SWT.VERTICAL));
 
-        Text text4 = new Text(group4, SWT.SINGLE | SWT.BORDER);
-        text4.setTextLimit(8);
+        Text input = new Text(group, SWT.SINGLE | SWT.BORDER);
+        input.setTextLimit(8);
 
-        Button button4 = new Button (group4, SWT.PUSH);
-        button4.setText("OK");
+        Button OK = new Button (group, SWT.PUSH);
+        OK.setText("OK");
 
-        Button button41 = new Button (group4, SWT.CHECK);
-        button41.setText("One");
+        Button pushButtonOne= new Button (group, SWT.CHECK);
+        pushButtonOne.setText("One");
 
-        Button button42 = new Button (group4, SWT.CHECK);
-        button42.setText("Two");
+        Button pushButtonTwo = new Button (group, SWT.CHECK);
+        pushButtonTwo.setText("Two");
 
-        Button button43 = new Button (group4, SWT.CHECK);
-        button43.setText("Three");
+        Button pushButtonThree = new Button (group, SWT.CHECK);
+        pushButtonThree.setText("Three");
 
-        button4.addSelectionListener(new SelectionAdapter() {
+        OK.addSelectionListener(new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent e) {
 
-                if(!text4.getText().isEmpty()) {
+                if(!input.getText().isEmpty()) {
 
-                    if(text4.getText().contentEquals(button41.getText())) {
-                        if(button41.getSelection() == true) {
-                            button41.setSelection(false);
+                    if(input.getText().contentEquals(pushButtonOne.getText())) {
+                        if(pushButtonOne.getSelection() == true) {
+                            pushButtonOne.setSelection(false);
                         }
                         else {
-                            button41.setSelection(true);
+                            pushButtonOne.setSelection(true);
                         }
                     }
-                    else if(text4.getText().contentEquals(button42.getText())) {
-                        if(button42.getSelection() == true) {
-                            button42.setSelection(false);
+                    else if(input.getText().contentEquals(pushButtonTwo.getText())) {
+                        if(pushButtonTwo.getSelection() == true) {
+                            pushButtonTwo.setSelection(false);
                         }
                         else {
-                            button42.setSelection(true);
+                            pushButtonTwo.setSelection(true);
                         }
                     }
-                    else if(text4.getText().contentEquals(button43.getText())) {
-                        if(button43.getSelection() == true) {
-                            button43.setSelection(false);
+                    else if(input.getText().contentEquals(pushButtonThree.getText())) {
+                        if(pushButtonThree.getSelection() == true) {
+                            pushButtonThree.setSelection(false);
                         }
                         else {
-                            button43.setSelection(true);
+                            pushButtonThree.setSelection(true);
                         }
                     }
                     else{
-                        MessageBox msg4 = new MessageBox(shell, SWT.ICON_ERROR);
-                        msg4.setMessage("No button with a specified name!");
-                        msg4.open();
+                        MessageBox noButton = new MessageBox(shell, SWT.ICON_ERROR);
+                        noButton.setMessage("No button with a specified name!");
+                        noButton.open();
                     }
                 }
             }

@@ -11,10 +11,10 @@ import org.eclipse.swt.widgets.Text;
 
 public class RadioButtonGroup {
     public static void main(String[] args, Display display, Shell shell) {
-        MyGroup(display, shell);
+        myGroup(display, shell);
     }
 
-    static void MyGroup(Display display, Shell shell) {
+    static void myGroup(Display display, Shell shell) {
         Group group3 = new Group(shell, SWT.NONE);
         group3.setText("Group №3");;
         group3.setLayout(new FillLayout(SWT.VERTICAL));

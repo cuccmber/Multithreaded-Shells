@@ -14,27 +14,27 @@ import org.eclipse.swt.widgets.Text;
 
 public class TableGroup {
     public static void main(String[] args, Display display, Shell shell) {
-        MyGroup(display, shell);
+        myGroup(display, shell);
     }
 
-    static void MyGroup(Display display, Shell shell) {
-        Group group5 = new Group(shell, SWT.NONE);
-        group5.setText("Group №5");
-        group5.setLayout(new FillLayout(SWT.VERTICAL));
+    static void myGroup(Display display, Shell shell) {
+        Group group = new Group(shell, SWT.NONE);
+        group.setText("Group №5");
+        group.setLayout(new FillLayout(SWT.VERTICAL));
 
-        Text text5 = new Text(group5, SWT.SINGLE | SWT.BORDER);
-        text5.setTextLimit(5);
+        Text input = new Text(group, SWT.SINGLE | SWT.BORDER);
+        input.setTextLimit(5);
 
-        Button button51 = new Button (group5, SWT.PUSH);
-        button51.setText("Add item");
+        Button addButton = new Button (group, SWT.PUSH);
+        addButton.setText("Add item");
 
-        Button button52 = new Button (group5, SWT.PUSH);
-        button52.setText("Move to column 2");
+        Button moveTo2ndButton = new Button (group, SWT.PUSH);
+        moveTo2ndButton.setText("Move to column 2");
 
-        Button button53 = new Button (group5, SWT.PUSH);
-        button53.setText("Move to column 1");
+        Button moveTo1stButton = new Button (group, SWT.PUSH);
+        moveTo1stButton.setText("Move to column 1");
 
-        Table table = new Table(group5, SWT.BORDER | SWT.FULL_SELECTION);
+        Table table = new Table(group, SWT.BORDER | SWT.FULL_SELECTION);
         table.setLinesVisible(true);
         table.setSize(200, 200);
 
@@ -43,18 +43,18 @@ public class TableGroup {
         column1.setWidth(63);
         column2.setWidth(63);
 
-        button51.addSelectionListener(new SelectionAdapter() {
+        addButton.addSelectionListener(new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent e) {
-                if(!text5.getText().isEmpty()) {
+                if(!input.getText().isEmpty()) {
                     TableItem item = new TableItem(table, SWT.NONE);
-                    item.setText(0, text5.getText());
+                    item.setText(0, input.getText());
                 }
             }
         });
 
-        button52.addSelectionListener(new SelectionAdapter() {
+        moveTo2ndButton.addSelectionListener(new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent e) {
@@ -78,7 +78,7 @@ public class TableGroup {
             }
         });
 
-        button53.addSelectionListener(new SelectionAdapter() {
+        moveTo1stButton.addSelectionListener(new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent e) {
